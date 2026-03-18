@@ -1,6 +1,8 @@
 import React from 'react';
 import './Hero.css';
 import profileImage from '../assets/Besart6.png';
+import logo from "../assets/logo.png";
+
 
 export default function Hero() {
   return (
@@ -17,10 +19,8 @@ export default function Hero() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <img 
-              src="/src/assets/logo.png" 
-              alt="Logo"
-            />
+          <img src={logo} alt="Logo" />
+
           </div>
           <div className="nav-links">
             <a href="#about" className="nav-link">About me</a>
@@ -48,14 +48,15 @@ export default function Hero() {
               I strive to build immersive and beautiful websites through clean code and
               user-focused design.
             </p>
-            <button
-              className="download-cv-btn"
-              onClick={() => {
-                window.open('/Besart_CV.pdf', '_blank');
-              }}
-            >
-              Preview CV
-            </button>
+  <button
+  className="download-cv-btn"
+  onClick={() => {
+    window.open('/portfolio-website/Besart_CV.pdf', '_blank');
+  }}
+>
+  Preview CV
+</button>
+
           </div>
           
           {/* RIGHT */}

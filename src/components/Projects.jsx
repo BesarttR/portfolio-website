@@ -1,6 +1,7 @@
 import makceniThumbnail from "../assets/makceni.png";
 import bbsThumbnail from "../assets/bbs.png";
 import signinThumbnail from "../assets/signin.png";
+import accountantThumbnail from "../assets/accountant.jpg";
 
 const projects = [
   {
@@ -30,6 +31,15 @@ const projects = [
     liveUrl:
       "https://my-bbs-project-hw7vt1byh-besart-ramadanis-projects-f109fe42.vercel.app",
     codeUrl: "https://github.com/BesarttR/my-bbs-project",
+  },
+    {
+    title: "Accountants webapplication",
+    description:
+      "Built a responsive, multilingual accountant web app with React and Vite, delivering a clean and efficient interface for financial management." ,
+    thumbnail: accountantThumbnail,
+    techStack: "React, React DOM, i18n for multilingual support.",
+    liveUrl: "https://besarttr.github.io/accountant-project/",
+    codeUrl: "https://github.com/BesarttR/accountant-project",
   },
 ];
 
