@@ -29,7 +29,7 @@ const projects = [
     thumbnail: bbsThumbnail,
     techStack: "HTML, JavaScript, SASS, React",
     liveUrl:
-      "https://my-bbs-project-hw7vt1byh-besart-ramadanis-projects-f109fe42.vercel.app",
+      "https://besarttr.github.io/my-bbs-project/",
     codeUrl: "https://github.com/BesarttR/my-bbs-project",
   },
     {
