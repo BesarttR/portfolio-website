@@ -32,7 +32,7 @@ export default function Hero() {
             View Projects
           </button>
           <a
-            href="/portfolio-website/Besart_Ramadani_CV.pdf"
+            href="/Besart_Ramadani_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline"
