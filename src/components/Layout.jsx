@@ -4,7 +4,7 @@ export function Nav() {
   return (
     <nav className="nav">
       <a href="#home" className="nav-logo" onClick={e => { e.preventDefault(); scrollTo('home'); }}>
-        BR<span>.</span>dev
+        Besart Ramadani<span>—</span>Full-Stack Web Developer
       </a>
       <ul className="nav-links">
         {[['about','About'], ['skills','Skills'], ['projects','Projects'], ['experience','Experience']].map(([id, label]) => (
