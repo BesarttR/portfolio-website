@@ -1,22 +1,75 @@
-import React from "react";
-import Hero from "./components/Hero";
+import { useEffect } from 'react';
+import './index.css';
+import { Nav, Footer } from './components/Layout';
+import Hero from './components/Hero';
+import Marquee from './components/Marquee';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Experience from './components/Experience';
 import Contact from './components/Contact';
-import About from "./components/About";
-import Footer from "./components/Footer";
-import Projects from "./components/Projects";
-function App() {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <div style={{ flexGrow: 1 }}>
-        <Hero />
-        <About />
-         <Projects /> 
-      </div>
-      <Contact /> 
-      <Footer/>
-    </div>
-  );
+
+function useCursor() {
+  useEffect(() => {
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring) return;
+
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+    let raf;
+
+    const onMove = e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top = mouseY + 'px';
+    };
+
+    const animate = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      raf = requestAnimationFrame(animate);
+    };
+
+    const onEnter = () => document.body.classList.add('hovering');
+    const onLeave = () => document.body.classList.remove('hovering');
+
+    document.addEventListener('mousemove', onMove);
+    document.querySelectorAll('a, button, .project-card, .skill-card, .contact-link-item').forEach(el => {
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
+    });
+
+    raf = requestAnimationFrame(animate);
+    return () => {
+      document.removeEventListener('mousemove', onMove);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 }
 
+export default function App() {
+  useCursor();
 
-export default App;
+  return (
+    <>
+      <div id="cursor-dot" />
+      <div id="cursor-ring" />
+
+      <Nav />
+      <main>
+        <Hero />
+        <Marquee />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
+      <Footer />
+    </>
+  );
+}

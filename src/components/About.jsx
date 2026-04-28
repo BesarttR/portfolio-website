@@ -1,340 +1,161 @@
-import { useState, useEffect } from 'react';
-import skillsImage from '../assets/skills.png';
-import aboutImage from '../assets/aboutme.png';
-import skillIcon from '../assets/skill.png';
-import jsIcon from '../assets/javascript.svg.png';
-import reactIcon from '../assets/images.png';
-import htmlCssIcon from '../assets/csshtml.jpg';
-import nodeIcon from '../assets/nodes.png';
+import { useEffect, useRef, useState } from 'react';
+import aboutImage from '../assets/Besart6.png';
 
-function About() {
-  const [hasAnimated, setHasAnimated] = useState(false);
+const IconPin = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#00D4FF"/>
+  </svg>
+);
+const IconBriefcase = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="2" y="8" width="20" height="13" rx="2" stroke="#2D7FEA" strokeWidth="1.5"/>
+    <path d="M16 8V6a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="#2D7FEA" strokeWidth="1.5"/>
+    <line x1="2" y1="14" x2="22" y2="14" stroke="#2D7FEA" strokeWidth="1" opacity="0.5"/>
+  </svg>
+);
+const IconRocket = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C12 2 7 6 7 13h10c0-7-5-11-5-11z" fill="#2D7FEA" opacity="0.8"/>
+    <path d="M7 13c0 2 1 3 2 4l3 3 3-3c1-1 2-2 2-4" stroke="#2D7FEA" strokeWidth="1.2" fill="none"/>
+    <circle cx="12" cy="10" r="1.5" fill="#00D4FF"/>
+    <path d="M9 17l-2 3M15 17l2 3" stroke="#2D7FEA" strokeWidth="1.2" strokeLinecap="round"/>
+  </svg>
+);
+const IconCap = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 3L2 9l10 6 10-6-10-6z" fill="#2D7FEA"/>
+    <path d="M6 12v5c0 2 2.7 4 6 4s6-2 6-4v-5" stroke="#2D7FEA" strokeWidth="1.5" fill="none"/>
+    <line x1="20" y1="9" x2="20" y2="14" stroke="#00D4FF" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const FULL_TEXT = `Full-Stack Web Developer with a sharp focus on Next.js and Tailwind CSS — my primary weapons for building fast, scalable, and visually refined web applications. I deliver pixel-perfect interfaces backed by solid architecture, whether that's a high-performance marketing site, a dynamic web app, or a headless CMS integration via Contentful.
+
+With a background in Marketing Management and completed Full-Stack & Front-End development programs, I bring a rare combination: technical depth and product instinct. I understand both how to build it and why it should be built that way — from component structure to conversion-focused UX.
+
+My stack spans React, Next.js, Tailwind CSS, Node.js, Supabase, and REST APIs. I'm currently expanding into Contentful CMS development, helping clients build content-rich platforms that are easy to manage and impossible to outgrow.`;
+
+function TypewriterText({ text, isVisible }) {
+  const [displayed, setDisplayed] = useState('');
+  const indexRef = useRef(0);
+  const timerRef = useRef(null);
+  const startedRef = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
-            setHasAnimated(true);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
+    if (!isVisible || startedRef.current) return;
+    startedRef.current = true;
 
-    const section = document.getElementById('about');
-    if (section) observer.observe(section);
+    const CHARS_PER_TICK = 2;
+    const DELAY_MS = 18;
 
-    return () => observer.disconnect();
-  }, [hasAnimated]);
+    const tick = () => {
+      indexRef.current = Math.min(indexRef.current + CHARS_PER_TICK, text.length);
+      setDisplayed(text.slice(0, indexRef.current));
+      if (indexRef.current < text.length) {
+        timerRef.current = setTimeout(tick, DELAY_MS);
+      }
+    };
+
+    timerRef.current = setTimeout(tick, 300);
+    return () => clearTimeout(timerRef.current);
+  }, [isVisible, text]);
+
+  const paragraphs = displayed.split('\n\n');
 
   return (
-    <section 
-      id="about" 
-      style={{ 
-        padding: "40px 20px", 
-        backgroundColor: "#62E5FB",
-        display: "flex",
-        alignItems: "center",
-        minHeight: "100vh"
-      }}
-    >
-      <style>
-        {`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-          
-          /* Mobile responsive styles */
-          .about-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: flex-start;
-          }
-          
-          .about-title {
-            font-size: 3.5rem;
-            color: #0891b2;
-            margin-bottom: 40px;
-            text-align: left;
-          }
-          
-          .about-image-container {
-            position: relative;
-            text-align: center;
-          }
-          
-          .about-image {
-            display: block;
-            margin: 0 auto;
-            width: 300px;
-            height: auto;
-            max-width: 100%;
-          }
-          
-          .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            justify-items: center;
-          }
-          
-          .skill-item {
-            text-align: center;
-          }
-          
-          .skill-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-          }
-          
-          /* Tablet breakpoint */
-          @media (max-width: 768px) {
-            .about-container {
-              grid-template-columns: 1fr;
-              gap: 40px;
-            }
-            
-            .about-title {
-              font-size: 3rem;
-              text-align: center;
-              margin-bottom: 30px;
-            }
-            
-            .about-image {
-              width: 250px;
-            }
-            
-            .skills-grid {
-              grid-template-columns: repeat(2, 1fr);
-              gap: 25px;
-            }
-            
-            /* Hide decorative icons on mobile for cleaner look */
-            .decorative-icon {
-              display: none;
-            }
-          }
-          
-          /* Mobile breakpoint */
-          @media (max-width: 480px) {
-            .about-title {
-              font-size: 2.5rem;
-            }
-            
-            .about-image {
-              width: 200px;
-            }
-            
-            .about-text {
-              font-size: 1rem !important;
-            }
-            
-            .skills-title {
-              font-size: 1rem !important;
-            }
-            
-            .skill-icon {
-              width: 50px;
-              height: 50px;
-            }
-          }
-        `}
-      </style>
+    <>
+      {paragraphs.map((para, i) => (
+        <p key={i} className="about-text">
+          {para}
+          {i === paragraphs.length - 1 && indexRef.current < text.length && (
+            <span className="typewriter-cursor" />
+          )}
+        </p>
+      ))}
+    </>
+  );
+}
 
-      <div className="about-container">
-        {/* Left Side - Image, Decorative Elements, and Education */}
-        <div className="about-image-container">
-          <h2 
-            className="about-title"
-            style={{ 
-              animation: hasAnimated ? "fadeInUp 0.8s ease-out forwards" : "none",
-              opacity: hasAnimated ? 0 : 1
-            }}
-          >
-            About me
-          </h2>
-          
-          <img 
-            src={aboutImage} 
-            alt="About Me" 
-            className="about-image"
-            style={{ 
-              animation: hasAnimated ? "fadeIn 0.8s ease-out 0.3s forwards" : "none",
-              opacity: hasAnimated ? 0 : 1
-            }} 
-          />
+export default function About() {
+  const ref = useRef(null);
+  const [textVisible, setTextVisible] = useState(false);
 
-          {/* Education moved here - under the image with 200px gap */}
-          <p style={{ 
-            fontSize: "1.5rem",
-            fontWeight: "600",
-            color: "#1e293b",
-            marginTop: "200px",
-            marginBottom: "20px",
-            animation: hasAnimated ? "fadeInUp 0.8s ease-out 0.8s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1,
-            textAlign: "left"
-          }}>
-            🎓 Education:<br/> Bachelor's in Marketing Management <br/>South East European University
-          </p>
-          
-          {/* Decorative icons around image - ALL using TOP positioning now */}
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "180px", 
-            left: "70px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.5s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>⚡</div>
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "180px", 
-            right: "200px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.6s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>✨</div>
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "420px", 
-            left: "70px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.65s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>👑</div>
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "430px", 
-            right: "200px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.7s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>✏️</div>
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "260px", 
-            right: "150px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.75s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>🎨</div>
-          <div className="decorative-icon" style={{ 
-            position: "absolute", 
-            top: "330px", 
-            left: "30px", 
-            fontSize: "2rem",
-            animation: hasAnimated ? "fadeIn 0.6s ease-out 0.8s forwards" : "none",
-            opacity: hasAnimated ? 0 : 1
-          }}>🔗</div>
+  useEffect(() => {
+    const sectionObserver = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          setTextVisible(true);
+          sectionObserver.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    const revealObserver = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      }),
+      { threshold: 0.05 }
+    );
+
+    if (ref.current) sectionObserver.observe(ref.current);
+    ref.current?.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    return () => {
+      sectionObserver.disconnect();
+      revealObserver.disconnect();
+    };
+  }, []);
+
+  return (
+    <section className="section about-section" id="about" ref={ref}>
+      <div className="reveal">
+        <p className="section-label">About me</p>
+        <h2 className="section-title">Building with purpose,<br /><span>shipping with craft</span></h2>
+      </div>
+
+      <div className="about-grid">
+        <div>
+          <div className="reveal" style={{ transitionDelay: '0.1s', marginBottom: '36px' }}>
+            <TypewriterText text={FULL_TEXT} isVisible={textVisible} />
+          </div>
+
+          <div className="about-cards reveal" style={{ transitionDelay: '0.3s' }}>
+            <div className="about-card">
+              <span className="about-card-icon">{IconCap}</span>
+              <div className="about-card-title">Education</div>
+              <div className="about-card-sub">Marketing Management · SEEU</div>
+            </div>
+            <div className="about-card">
+              <span className="about-card-icon">{IconPin}</span>
+              <div className="about-card-title">Location</div>
+              <div className="about-card-sub">Skopje, North Macedonia</div>
+            </div>
+            <div className="about-card">
+              <span className="about-card-icon">{IconBriefcase}</span>
+              <div className="about-card-title">Focus</div>
+              <div className="about-card-sub">Next.js · Tailwind · Contentful</div>
+            </div>
+            <div className="about-card">
+              <span className="about-card-icon">{IconRocket}</span>
+              <div className="about-card-title">Status</div>
+              <div className="about-card-sub">Open to opportunities</div>
+            </div>
+          </div>
         </div>
 
-        {/* Right Side - Text and Skills */}
-        <div style={{ textAlign: "left" }}>
-          <p 
-            className="about-text"
-            style={{ 
-              fontSize: "1.2rem",
-              lineHeight: "1.8",
-              color: "#1e293b",
-              marginBottom: "40px",
-              animation: hasAnimated ? "fadeInUp 0.8s ease-out 1s forwards" : "none",
-              opacity: hasAnimated ? 0 : 1
-            }}
-          >
-           I’m a web developer passionate about creating clean, modern, and responsive web applications with React, HTML, CSS, and JavaScript. With a Bachelor’s degree in Marketing Management and completed Full-Stack & Front-End development courses, I combine technical expertise with a user-focused mindset to build interfaces that are intuitive, fast, and practical.
-My marketing background gives me a unique perspective on designing applications that not only work flawlessly but also deliver meaningful experiences to users. I’m dedicated to continuous learning, aiming to expand my skills into backend development with Node.js, Express, and databases, and ultimately grow into a versatile full-stack developer.
-Highly motivated, disciplined, and detail-oriented, I write clean, maintainable code and strive to deliver projects that add real value. </p>
-
-          {/* Skills Section */}
-          <div style={{ marginBottom: "40px" }}>
-            <h3 
-              className="skills-title"
-              style={{ 
-                fontSize: "3rem", 
-                color: "#1e293b",
-                marginBottom: "30px",
-                animation: hasAnimated ? "fadeInUp 0.8s ease-out 1.5s forwards" : "none",
-                opacity: hasAnimated ? 0 : 1,
-                display: "flex",
-                alignItems: "center",
-                gap: "15px"
-              }}
-            >
-              <img src={skillIcon} alt="Skills" style={{ width: "50px", height: "50px" }} />
-              Skills
-            </h3>
-
-            <div className="skills-grid">
-              {/* HTML & CSS */}
-              <div 
-                className="skill-item"
-                style={{ 
-                  animation: hasAnimated ? "fadeInUp 0.8s ease-out 1.7s forwards" : "none", 
-                  opacity: hasAnimated ? 0 : 1 
-                }}
-              >
-                <img src={htmlCssIcon} alt="HTML & CSS" className="skill-icon" />
-                <p style={{ margin: 0, fontWeight: "600", color: "#1e293b", fontSize: "1rem" }}>HTML & CSS</p>
-              </div>
-
-              {/* JavaScript */}
-              <div 
-                className="skill-item"
-                style={{ 
-                  animation: hasAnimated ? "fadeInUp 0.8s ease-out 1.9s forwards" : "none", 
-                  opacity: hasAnimated ? 0 : 1 
-                }}
-              >
-                <img src={jsIcon} alt="JavaScript" className="skill-icon" />
-                <p style={{ margin: 0, fontWeight: "600", color: "#1e293b", fontSize: "1rem" }}>JavaScript</p>
-              </div>
-
-              {/* React */}
-              <div 
-                className="skill-item"
-                style={{ 
-                  animation: hasAnimated ? "fadeInUp 0.8s ease-out 2.1s forwards" : "none", 
-                  opacity: hasAnimated ? 0 : 1 
-                }}
-              >
-                <img src={reactIcon} alt="React" className="skill-icon" />
-                <p style={{ margin: 0, fontWeight: "600", color: "#1e293b", fontSize: "1rem" }}>React</p>
-              </div>
-
-              {/* Node.js */}
-              <div 
-                className="skill-item"
-                style={{ 
-                  animation: hasAnimated ? "fadeInUp 0.8s ease-out 2.3s forwards" : "none", 
-                  opacity: hasAnimated ? 0 : 1 
-                }}
-              >
-                <img src={nodeIcon} alt="Node.js" className="skill-icon" />
-                <p style={{ margin: 0, fontWeight: "600", color: "#1e293b", fontSize: "1rem" }}>Node.js</p>
-              </div>
-            </div>
+        <div className="about-right reveal" style={{ transitionDelay: '0.2s' }}>
+          <div className="about-image-wrap">
+            <div className="about-image-bg" />
+            <img src={aboutImage} alt="Besart Ramadani" className="about-img" />
+          </div>
+          <div className="about-edu" style={{ marginTop: '28px' }}>
+            <div className="about-edu-label" style={{ display:'flex', alignItems:'center', gap:8 }}>{IconCap} Education</div>
+            <div className="about-edu-title">Bachelor's in Marketing Management</div>
+            <div className="about-edu-school">South East European University</div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-export default About;
