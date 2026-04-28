@@ -58,8 +58,6 @@ export default function Hero() {
 
           <div className="hero-stats">
             <div className="hero-stat">
-              <span className="hero-stat-num">8+</span>
-              <span className="hero-stat-lbl">Projects</span>
             </div>
             <div className="hero-stat">
               <span className="hero-stat-num">2+</span>
