@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 const TIMELINE = [
   {
     date: 'Present',
-    role: 'Junior Full-Stack Web Developer',
+    role: 'Full-Stack Web Developer',
     company: 'Sim Sector Studios',
     tag: 'Current',
     desc: 'Joined Sim Sector Studios as a Junior Full-Stack Developer — building and maintaining production-grade web applications using Next.js, Tailwind CSS, and Supabase. Contributing to client projects across industries, implementing Contentful CMS integrations, and shipping responsive, performance-optimised interfaces end-to-end.',

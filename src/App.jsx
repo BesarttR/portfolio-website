@@ -56,9 +56,7 @@ export default function App() {
 
   return (
     <>
-      <div id="cursor-dot" />
-      <div id="cursor-ring" />
-
+  
       <Nav />
       <main>
         <Hero />

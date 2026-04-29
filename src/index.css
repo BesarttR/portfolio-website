@@ -34,36 +34,7 @@ body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   overflow-x: hidden;
-  cursor: none;
 }
-
-/* ============================================================
-   CUSTOM CURSOR
-   ============================================================ */
-#cursor-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: var(--accent-cyan);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: width 0.15s, height 0.15s, background 0.15s;
-}
-#cursor-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(0, 212, 255, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.08s;
-}
-body.hovering #cursor-dot   { width: 10px; height: 10px; background: var(--accent-blue); }
-body.hovering #cursor-ring  { width: 50px; height: 50px; border-color: var(--accent-blue); }
 
 /* ============================================================
    NOISE GRAIN OVERLAY
@@ -636,6 +607,7 @@ body::before {
   width: 100%;
   height: 200px;
   object-fit: cover;
+  object-position: top;
   background: var(--bg-surface);
   display: block;
   filter: grayscale(30%) brightness(0.8);

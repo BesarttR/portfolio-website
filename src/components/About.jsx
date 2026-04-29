@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import aboutImage from '../assets/Besart6.png';
 
 const IconPin = (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +33,81 @@ const FULL_TEXT = `Full-Stack Web Developer with a sharp focus on Next.js and Ta
 With a background in Marketing Management and completed Full-Stack & Front-End development programs, I bring a rare combination: technical depth and product instinct. I understand both how to build it and why it should be built that way — from component structure to conversion-focused UX.
 
 My stack spans React, Next.js, Tailwind CSS, Node.js, Supabase, and REST APIs. I'm currently expanding into Contentful CMS development, helping clients build content-rich platforms that are easy to manage and impossible to outgrow.`;
+
+const STATS = [
+  { num: '6+', label: 'Projects Shipped' },
+  { num: '8+', label: 'Technologies' },
+  { num: '100%', label: 'Remote Ready' },
+  { num: '2+', label: 'Years Experience' },
+];
+
+function StatCard({ num, label, visible, delay }) {
+  const [count, setCount] = useState('0');
+
+  useEffect(() => {
+    if (!visible) return;
+    const isPercent = num.includes('%');
+    const isPlus = num.includes('+');
+    const target = parseInt(num);
+
+    if (isNaN(target)) {
+      setCount(num);
+      return;
+    }
+    let current = 0;
+    const increment = Math.ceil(target / 30);
+    const timer = setTimeout(() => {
+      const tick = setInterval(() => {
+        current = Math.min(current + increment, target);
+        setCount(current + (isPercent ? '%' : isPlus ? '+' : ''));
+        if (current >= target) clearInterval(tick);
+      }, 40);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [visible, num, delay]);
+
+  return (
+    <div style={{
+      background: 'var(--bg-card)',
+      border: '1px solid var(--border)',
+      padding: '28px 24px',
+      textAlign: 'center',
+      clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)',
+      transition: 'border-color 0.2s, background 0.2s',
+    }}
+    onMouseEnter={e => {
+      e.currentTarget.style.borderColor = 'var(--border-bright)';
+      e.currentTarget.style.background = 'var(--bg-card-hover)';
+    }}
+    onMouseLeave={e => {
+      e.currentTarget.style.borderColor = 'var(--border)';
+      e.currentTarget.style.background = 'var(--bg-card)';
+    }}
+    >
+      <div style={{
+        fontSize: '2.4rem',
+        fontWeight: 800,
+        background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-cyan))',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+        lineHeight: 1,
+        marginBottom: 10,
+      }}>
+        {visible ? count : '0'}
+      </div>
+      <div style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: '0.7rem',
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+        color: 'var(--text-muted)',
+      }}>
+        {label}
+      </div>
+    </div>
+  );
+}
 
 function TypewriterText({ text, isVisible }) {
   const [displayed, setDisplayed] = useState('');
@@ -79,12 +153,14 @@ function TypewriterText({ text, isVisible }) {
 export default function About() {
   const ref = useRef(null);
   const [textVisible, setTextVisible] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(false);
 
   useEffect(() => {
     const sectionObserver = new IntersectionObserver(
       entries => {
         if (entries[0].isIntersecting) {
           setTextVisible(true);
+          setStatsVisible(true);
           sectionObserver.disconnect();
         }
       },
@@ -145,14 +221,50 @@ export default function About() {
         </div>
 
         <div className="about-right reveal" style={{ transitionDelay: '0.2s' }}>
-          <div className="about-image-wrap">
-            <div className="about-image-bg" />
-            <img src={aboutImage} alt="Besart Ramadani" className="about-img" />
+          {/* Stats grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
+            {STATS.map((s, i) => (
+              <StatCard key={s.label} num={s.num} label={s.label} visible={statsVisible} delay={i * 150} />
+            ))}
           </div>
-          <div className="about-edu" style={{ marginTop: '28px' }}>
-            <div className="about-edu-label" style={{ display:'flex', alignItems:'center', gap:8 }}>{IconCap} Education</div>
-            <div className="about-edu-title">Bachelor's in Marketing Management</div>
-            <div className="about-edu-school">South East European University</div>
+
+          {/* Services block */}
+          <div style={{
+            background: 'var(--bg-card)',
+            border: '1px solid var(--border)',
+            borderLeft: '3px solid var(--accent-blue)',
+            padding: '24px',
+          }}>
+            <div style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.68rem',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+              color: 'var(--accent-blue)',
+              marginBottom: 16,
+            }}>
+              What I offer
+            </div>
+            {[
+              'Next.js Web Applications',
+              'Tailwind CSS UI Development',
+              'Contentful CMS Integration',
+              'REST API Development',
+              'Responsive & Mobile-first Design',
+            ].map(service => (
+              <div key={service} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                padding: '8px 0',
+                borderBottom: '1px solid var(--border)',
+                fontSize: '0.88rem',
+                color: 'var(--text-secondary)',
+              }}>
+                <span style={{ color: 'var(--accent-cyan)', fontSize: '0.7rem' }}>▹</span>
+                {service}
+              </div>
+            ))}
           </div>
         </div>
       </div>
