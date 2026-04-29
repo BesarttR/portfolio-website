@@ -442,9 +442,9 @@ body::before {
 }
 .about-text {
   font-size: 1.05rem;
-  line-height: 1.85;
+  line-height: 1.75;
   color: var(--text-secondary);
-  margin-bottom: 36px;
+  margin-bottom: 12px;
 }
 .about-cards {
   display: grid;
