@@ -28,9 +28,9 @@ const IconCap = (
   </svg>
 );
 
-const FULL_TEXT = `Full-Stack Web Developer with a sharp focus on Next.js and Tailwind CSS — my primary weapons for building fast, scalable, and visually refined web applications. I deliver pixel-perfect interfaces backed by solid architecture, whether that's a high-performance marketing site, a dynamic web app, or a headless CMS integration via Contentful.
+const FULL_TEXT = `Front-End Web Developer with a sharp focus on Next.js and Tailwind CSS — my primary weapons for building fast, scalable, and visually refined web applications. I deliver pixel-perfect interfaces backed by solid architecture, whether that's a high-performance marketing site, a dynamic web app, or a headless CMS integration via Contentful.
 
-With a background in Marketing Management and completed Full-Stack & Front-End development programs, I bring a rare combination: technical depth and product instinct. I understand both how to build it and why it should be built that way — from component structure to conversion-focused UX.
+With a background in Marketing Management and completed Front-End & Front-End development programs, I bring a rare combination: technical depth and product instinct. I understand both how to build it and why it should be built that way — from component structure to conversion-focused UX.
 
 My stack spans React, Next.js, Tailwind CSS, Node.js, Supabase, and REST APIs. I'm currently expanding into Contentful CMS development, helping clients build content-rich platforms that are easy to manage and impossible to outgrow.`;
 

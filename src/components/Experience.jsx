@@ -3,10 +3,10 @@ import { useEffect, useRef } from 'react';
 const TIMELINE = [
   {
     date: 'Present',
-    role: 'Full-Stack Web Developer',
+    role: 'Front-End Web Developer',
     company: 'Sim Sector Studios',
     tag: 'Current',
-    desc: 'Joined Sim Sector Studios as a Junior Full-Stack Developer — building and maintaining production-grade web applications using Next.js, Tailwind CSS, and Supabase. Contributing to client projects across industries, implementing Contentful CMS integrations, and shipping responsive, performance-optimised interfaces end-to-end.',
+    desc: 'Joined Sim Sector Studios as a Junior Front-End Developer — building and maintaining production-grade web applications using Next.js, Tailwind CSS, and Supabase. Contributing to client projects across industries, implementing Contentful CMS integrations, and shipping responsive, performance-optimised interfaces end-to-end.',
   },
   {
     role: 'Frontend Intern',
@@ -15,10 +15,10 @@ const TIMELINE = [
     desc: 'Completed a hands-on frontend internship at Sim Sector Studios. Worked directly on real client interfaces — translating designs into clean, responsive React components with Tailwind CSS. Gained experience in collaborative git workflows, code reviews, and shipping production-ready UI under senior guidance.',
   },
   {
-    role: 'Full-Stack Development',
+    role: 'Front-End Development',
     company: 'Bootcamp & Online Courses · Self-directed',
     tag: null,
-    desc: 'Completed intensive Full-Stack and Front-End development programs covering React, Next.js, Node.js, Express, REST APIs, and modern JavaScript. Built several production-grade side projects including makceni.mk — a real-time fuel price platform for Macedonian drivers deployed on Vercel.',
+    desc: 'Completed intensive Front-End and Front-End development programs covering React, Next.js, Node.js, Express, REST APIs, and modern JavaScript. Built several production-grade side projects including makceni.mk — a real-time fuel price platform for Macedonian drivers deployed on Vercel.',
   },
   {
     role: "Bachelor's — Marketing Management",

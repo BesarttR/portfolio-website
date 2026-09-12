@@ -5,7 +5,7 @@ const CODE_LINES = [
   { token: ' besart', type: 'var' },
   { token: ' = {', type: 'bracket' },
   { token: '\n  role:', type: 'key' },
-  { token: ' "Full-Stack Web Developer"', type: 'string' },
+  { token: ' "Front-End Web Developer"', type: 'string' },
   { token: ',\n  stack:', type: 'key' },
   { token: ' ["Next.js"', type: 'string' },
   { token: ', "Tailwind"', type: 'string' },
@@ -106,7 +106,7 @@ export default function Hero() {
       <div className="hero-content">
         <p className="hero-eyebrow">Besart Ramadani — Skopje, MK</p>
         <h1 className="hero-title">
-          Full‑Stack<br />
+          Front‑End<br />
           <span className="accent">Web Developer</span>
         </h1>
         <p className="hero-subtitle">Next.js · Tailwind · Contentful</p>
@@ -122,7 +122,7 @@ export default function Hero() {
             </svg>
             View Projects
           </button>
-          <a href="/Besart_Ramadani_CV.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline">
+          <a href="/Besart_Ramadani_CV1.pdf" target="_blank" rel="noopener noreferrer" className="btn-outline">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
             </svg>
